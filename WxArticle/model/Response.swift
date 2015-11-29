@@ -102,12 +102,12 @@ class CategoryResponse : Response {
         }
     }
     
-    func typeName(id: Int) -> String {
+    func typeName(id: Int) -> String? {
         for type in typeList {
             if type.id == id {
                 return type.name
             }
         }
-        return ""
+        return nil
     }
 }

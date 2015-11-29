@@ -22,6 +22,7 @@
 		9D883BED1C09A59300E50390 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D883BEC1C09A59300E50390 /* DataManager.swift */; };
 		9D883BF01C09DAC600E50390 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D883BEF1C09DAC600E50390 /* ArticleViewController.swift */; };
 		9D883BF21C09EC0100E50390 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D883BF11C09EC0100E50390 /* CategoryViewController.swift */; };
+		9D883BF71C0B2F5D00E50390 /* KeySearchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D883BF61C0B2F5D00E50390 /* KeySearchedViewController.swift */; };
 		9DA1C3621BFA1487006D49CD /* WxArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C3611BFA1487006D49CD /* WxArticleTests.swift */; };
 		9DA1C36D1BFA1487006D49CD /* WxArticleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C36C1BFA1487006D49CD /* WxArticleUITests.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		9D883BEF1C09DAC600E50390 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		9D883BF11C09EC0100E50390 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		9D883BF31C0B14E200E50390 /* Objective-CBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Objective-CBridgingHeader.h"; sourceTree = "<group>"; };
+		9D883BF61C0B2F5D00E50390 /* KeySearchedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeySearchedViewController.swift; sourceTree = "<group>"; };
 		9DA1C3491BFA1487006D49CD /* WxArticle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WxArticle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA1C35D1BFA1487006D49CD /* WxArticleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WxArticleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA1C3611BFA1487006D49CD /* WxArticleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WxArticleTests.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				9D883BD81C0993E000E50390 /* ViewController.swift */,
 				9D883BEF1C09DAC600E50390 /* ArticleViewController.swift */,
 				9D883BF11C09EC0100E50390 /* CategoryViewController.swift */,
+				9D883BF61C0B2F5D00E50390 /* KeySearchedViewController.swift */,
 			);
 			path = WxArticle;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				9D883BE11C09943100E50390 /* Request.swift in Sources */,
 				9D883BD91C0993E000E50390 /* AppDelegate.swift in Sources */,
 				9D883BEB1C09979600E50390 /* HRToast+UIView.swift in Sources */,
+				9D883BF71C0B2F5D00E50390 /* KeySearchedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +542,7 @@
 			baseConfigurationReference = D5B778DC2369CBC69FC95AF3 /* Pods-WxArticle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (QM84W4496D)";
 				INFOPLIST_FILE = WxArticle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
@@ -551,6 +556,7 @@
 			baseConfigurationReference = 65099B1546CFD52AF0042AA2 /* Pods-WxArticle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (QM84W4496D)";
 				INFOPLIST_FILE = WxArticle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;

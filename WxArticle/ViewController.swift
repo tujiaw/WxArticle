@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var isLoading = false
-    var typeId: Int = 0 {
+    var typeId: Int = -1 {
         willSet {
             
         }
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
             requestData(self.typeId, page: self.page, toTop: true)
         }
     }
-    var page: Int = 0 {
+    var page: Int = 1 {
         willSet {
             
         }
@@ -40,7 +40,16 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.page = 1
+        
+        let curId = NSUserDefaults.standardUserDefaults().integerForKey("curId")
+        let curTitle = NSUserDefaults.standardUserDefaults().stringForKey("curTitle")
+        if let curTitle = curTitle {
+            self.typeId = curId
+            self.navigationItem.title = curTitle
+        } else {
+            self.typeId = 0
+            self.navigationItem.title = "热点"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +77,12 @@ class ViewController: UIViewController {
             }
             self.isLoading = false
             self.view.hideToastActivity()
-            self.navigationItem.title = Data.sharedManager.category.typeName(typeId)
+            
+            let curTitle = Data.sharedManager.category.typeName(typeId) ?? self.navigationItem.title
+            self.navigationItem.title = curTitle
+            NSUserDefaults.standardUserDefaults().setValue(curTitle, forKey: "curTitle")
+            NSUserDefaults.standardUserDefaults().setValue(self.typeId, forKey: "curId")
+            
             if toTop {
                 self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             }
