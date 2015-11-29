@@ -13,6 +13,26 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var isLoading = false
+    var typeId: Int = 0 {
+        willSet {
+            
+        }
+        didSet {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            Data.sharedManager.goodArticle.contentlist = [ContentList]()
+            requestData(self.typeId, page: self.page, toTop: true)
+        }
+    }
+    var page: Int = 0 {
+        willSet {
+            
+        }
+        didSet {
+            requestData(self.typeId, page: self.page)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,7 +40,23 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        let request = GoodArticleRequest(typeId: 0, key: "", page: 1)
+        self.page = 1
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        
+    }
+    
+    func requestData(typeId: Int, page: Int, toTop: Bool = false) {
+        if isLoading {
+            return
+        }
+        
+        isLoading = true
+        self.view.makeToastActivity()
+        let request = GoodArticleRequest(typeId: self.typeId, key: "", page: self.page)
         print(request.url)
         Alamofire.request(.GET, request.url).responseJSON {
             response in
@@ -30,13 +66,13 @@ class ViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+            self.isLoading = false
+            self.view.hideToastActivity()
+            self.navigationItem.title = Data.sharedManager.category.typeName(typeId)
+            if toTop {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+            }
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        
     }
 }
 
@@ -78,4 +114,17 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if isLoading {
+            return
+        }
+        
+        let space = CGFloat(20)
+        let y = scrollView.contentOffset.y + scrollView.bounds.size.height - scrollView.contentInset.bottom
+        if y > scrollView.contentSize.height + space {
+            ++self.page
+        }
+    }
 }
+

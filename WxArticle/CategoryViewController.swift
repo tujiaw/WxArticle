@@ -58,4 +58,23 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell!
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("select index:\(indexPath.row)")
+        if Data.sharedManager.category.typeList.count > indexPath.row {
+            tabBarController?.selectedIndex = 0
+            if let controllers = tabBarController?.viewControllers {
+                for controller in controllers {
+                    if let navController = controller as? UINavigationController {
+                        for controller in navController.viewControllers {
+                            if let viewController = controller as? ViewController {
+                                let id = Data.sharedManager.category.typeList[indexPath.row].id
+                                viewController.typeId = id
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

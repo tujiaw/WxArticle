@@ -56,11 +56,11 @@
 		9D883BE21C09944200E50390 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9D883BE51C0995BC00E50390 /* ExtensionString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		9D883BE71C0995E400E50390 /* ExtensionNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionNSDate.swift; sourceTree = "<group>"; };
-		9D883BE91C09963200E50390 /* Objective-CBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objective-CBridgingHeader.h"; sourceTree = "<group>"; };
 		9D883BEA1C09979600E50390 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
 		9D883BEC1C09A59300E50390 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		9D883BEF1C09DAC600E50390 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		9D883BF11C09EC0100E50390 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		9D883BF31C0B14E200E50390 /* Objective-CBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Objective-CBridgingHeader.h"; sourceTree = "<group>"; };
 		9DA1C3491BFA1487006D49CD /* WxArticle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WxArticle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA1C35D1BFA1487006D49CD /* WxArticleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WxArticleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA1C3611BFA1487006D49CD /* WxArticleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WxArticleTests.swift; sourceTree = "<group>"; };
@@ -118,7 +118,6 @@
 				9D883BD51C0993E000E50390 /* Main.storyboard */,
 				9D883BD71C0993E000E50390 /* Info.plist */,
 				9D883BD81C0993E000E50390 /* ViewController.swift */,
-				9D883BE91C09963200E50390 /* Objective-CBridgingHeader.h */,
 				9D883BEF1C09DAC600E50390 /* ArticleViewController.swift */,
 				9D883BF11C09EC0100E50390 /* CategoryViewController.swift */,
 			);
@@ -138,6 +137,7 @@
 		9D883BE41C09959800E50390 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				9D883BF31C0B14E200E50390 /* Objective-CBridgingHeader.h */,
 				9D883BE51C0995BC00E50390 /* ExtensionString.swift */,
 				9D883BE71C0995E400E50390 /* ExtensionNSDate.swift */,
 				9D883BEA1C09979600E50390 /* HRToast+UIView.swift */,
@@ -542,7 +542,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/Objective-CBridgingHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/tools/Objective-CBridgingHeader.h";
 			};
 			name = Debug;
 		};
@@ -555,7 +555,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/Objective-CBridgingHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/tools/Objective-CBridgingHeader.h";
 			};
 			name = Release;
 		};

@@ -101,4 +101,13 @@ class CategoryResponse : Response {
             self.typeList.sortInPlace{$0.id < $1.id}
         }
     }
+    
+    func typeName(id: Int) -> String {
+        for type in typeList {
+            if type.id == id {
+                return type.name
+            }
+        }
+        return ""
+    }
 }
