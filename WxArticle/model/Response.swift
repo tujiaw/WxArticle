@@ -6,7 +6,7 @@
 //  Copyright © 2015年 tujiaw. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SwiftyJSON
 
 class Response {
@@ -33,6 +33,7 @@ struct ContentList {
 
 class GoodArticleResponse: Response {
     var contentlist = [ContentList]()
+    var imagedic = [String: UIImage]()
     var maxResult = 0
     var allNum = 0
     var allPages = 0
@@ -68,6 +69,14 @@ class GoodArticleResponse: Response {
                 item.contentImg = contentImg
                 item.userName = userName
                 self.contentlist.append(item)
+                
+                if let url = NSURL(string: contentImg), let imgData = NSData(contentsOfURL: url), let image = UIImage(data: imgData) {
+                    UIGraphicsBeginImageContext(CGSize(width: 80, height: 80))
+                    image.drawInRect(CGRectMake(0, 0, 80, 80))
+                    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    imagedic[contentImg] = newImage
+                }
             }
         }
     }

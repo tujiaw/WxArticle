@@ -12,12 +12,12 @@ import Alamofire
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    let refreshControl = UIRefreshControl()
+    
+    var imageCache = [(String, UIImage)]()
     
     var isLoading = false
     var typeId: Int = -1 {
-        willSet {
-            
-        }
         didSet {
             self.navigationController?.popToRootViewControllerAnimated(true)
             Data.sharedManager.goodArticle.contentlist = [ContentList]()
@@ -25,9 +25,6 @@ class ViewController: UIViewController {
         }
     }
     var page: Int = 1 {
-        willSet {
-            
-        }
         didSet {
             requestData(self.typeId, page: self.page)
         }
@@ -40,6 +37,9 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        refreshControl.attributedTitle = NSAttributedString(string: "下拉刷新")
+        refreshControl.addTarget(self, action: "onRefreshControl", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
         
         let curId = NSUserDefaults.standardUserDefaults().integerForKey("curId")
         let curTitle = NSUserDefaults.standardUserDefaults().stringForKey("curTitle")
@@ -58,13 +58,21 @@ class ViewController: UIViewController {
         
     }
     
+    func onRefreshControl() {
+        Data.sharedManager.goodArticle.contentlist = [ContentList]()
+        requestData(typeId, page: 1)
+    }
+    
     func requestData(typeId: Int, page: Int, toTop: Bool = false) {
         if isLoading {
             return
         }
         
         isLoading = true
-        self.view.makeToastActivity()
+        if !refreshControl.refreshing {
+            self.view.makeToastActivity()
+        }
+        
         let request = GoodArticleRequest(typeId: self.typeId, key: "", page: self.page)
         print(request.url)
         Alamofire.request(.GET, request.url).responseJSON {
@@ -72,11 +80,13 @@ class ViewController: UIViewController {
             if response.result.isSuccess {
                 if let value = response.result.value {
                     Data.sharedManager.goodArticle.setData(value)
+                        
                     self.tableView.reloadData()
                 }
             }
             self.isLoading = false
             self.view.hideToastActivity()
+            self.refreshControl.endRefreshing()
             
             let curTitle = Data.sharedManager.category.typeName(typeId) ?? self.navigationItem.title
             self.navigationItem.title = curTitle
@@ -104,13 +114,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         
         if Data.sharedManager.goodArticle.contentlist.count > indexPath.row {
             let content = Data.sharedManager.goodArticle.contentlist[indexPath.row]
-            if let url = NSURL(string: content.contentImg), let imgData = NSData(contentsOfURL: url), let image = UIImage(data: imgData) {
-                UIGraphicsBeginImageContext(CGSize(width: 80, height: 80))
-                image.drawInRect(CGRectMake(0, 0, 80, 80))
-                let newImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                cell?.imageView?.image = newImage
-            }
+            cell?.imageView?.image = Data.sharedManager.goodArticle.imagedic[content.contentImg]
             cell?.textLabel?.text = content.userName
             cell?.detailTextLabel?.text = content.title
         }
