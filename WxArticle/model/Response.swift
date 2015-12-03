@@ -68,6 +68,11 @@ class GoodArticleResponse: Response {
                 item.url = url
                 item.contentImg = contentImg
                 item.userName = userName
+                for oldContent in self.contentlist {
+                    if url == oldContent.url {
+                        continue
+                    }
+                }
                 self.contentlist.append(item)
                 
                 if let url = NSURL(string: contentImg), let imgData = NSData(contentsOfURL: url), let image = UIImage(data: imgData) {

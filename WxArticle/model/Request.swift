@@ -50,9 +50,9 @@ class Request {
 }
 
 class GoodArticleRequest : Request {
-    var typeId: Int = 0
+    var typeId: Int = -1
     var key: String = ""
-    var page: Int = 1
+    var page: Int = -1
     
     init(typeId: Int, key: String, page: Int) {
         super.init(appId: 12078)
@@ -61,11 +61,24 @@ class GoodArticleRequest : Request {
         self.page = page
     }
     
+    init(page: Int, key: String) {
+        super.init(appId: 12078)
+        self.page = page
+        self.key = key
+    }
+    
     var url: String {
-        var params = [("typeId", String(typeId)), ("page", String(page))]
+        var params = [(String, String)]()
+        if typeId >= 0 {
+            params.append(("typeId", String(typeId)))
+        }
         if !key.isEmpty {
             params.append(("key", key))
         }
+        if page > 1 {
+            params.append(("page", String(page)))
+        }
+        
         let sign = super.sign(params, secret: "c7288cbf5a0941598e3ab326c27f9668")
         return super.url("http://route.showapi.com/582-2", sign: sign)
     }

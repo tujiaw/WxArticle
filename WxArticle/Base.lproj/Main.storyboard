@@ -126,6 +126,9 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <connections>
+                                            <segue destination="rO7-gJ-DFC" kind="show" id="e4x-zY-vPc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -321,4 +324,7 @@
             <point key="canvasLocation" x="-1719" y="546"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="e4x-zY-vPc"/>
+    </inferredMetricsTieBreakers>
 </document>

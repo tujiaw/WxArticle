@@ -13,4 +13,5 @@ class Data {
     
     var goodArticle = GoodArticleResponse()
     var category = CategoryResponse()
+    var searchArticle = GoodArticleResponse()
 }
