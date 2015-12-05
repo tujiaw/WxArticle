@@ -555,6 +555,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (QM84W4496D)";
 				INFOPLIST_FILE = WxArticle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WxArticle/wxsdk",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/tools/Objective-CBridgingHeader.h";
@@ -569,6 +573,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (QM84W4496D)";
 				INFOPLIST_FILE = WxArticle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WxArticle/wxsdk",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/tools/Objective-CBridgingHeader.h";

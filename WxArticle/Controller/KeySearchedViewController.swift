@@ -21,8 +21,9 @@ class KeySearchedViewController: UIViewController {
                 return
             }
             
+            //request.url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
             let request = GoodArticleRequest(page: page, key: key)
-            if let url = request.url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+            if let url = request.url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 isLoading = true
                 self.view.makeToastActivity()
                 Alamofire.request(.GET, url).responseJSON {
