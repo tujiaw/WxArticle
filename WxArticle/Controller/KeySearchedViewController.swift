@@ -123,3 +123,22 @@ extension KeySearchedViewController: UISearchBarDelegate {
     }
 }
 
+extension KeySearchedViewController {
+    func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+        if action == Selector("copy:") {
+            if indexPath.row < Data.sharedManager.searchArticle.contentlist.count {
+                UIPasteboard.generalPasteboard().string = Data.sharedManager.searchArticle.contentlist[indexPath.row].url
+            }
+        }
+    }
+    
+    func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        return action == Selector("copy:")
+    }
+    
+    func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+}
+
+
