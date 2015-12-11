@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		49A0C421549F05D367CFAC46 /* Pods_WxArticle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A3FBFEED15A93922658CBE3 /* Pods_WxArticle.framework */; };
+		9D47A9BE1C1B0F57005582AC /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D47A9B91C1B0F57005582AC /* libWeChatSDK.a */; };
+		9D47A9BF1C1B0F57005582AC /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9D47A9BA1C1B0F57005582AC /* read_me.txt */; };
+		9D47A9C11C1B19B7005582AC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D47A9C01C1B19B7005582AC /* SystemConfiguration.framework */; };
+		9D47A9C31C1B1A34005582AC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D47A9C21C1B1A34005582AC /* CoreTelephony.framework */; };
 		9D883BD91C0993E000E50390 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D883BD11C0993E000E50390 /* AppDelegate.swift */; };
 		9D883BDA1C0993E000E50390 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D883BD21C0993E000E50390 /* Assets.xcassets */; };
 		9D883BDB1C0993E000E50390 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D883BD31C0993E000E50390 /* LaunchScreen.storyboard */; };
@@ -47,6 +51,13 @@
 /* Begin PBXFileReference section */
 		2A3FBFEED15A93922658CBE3 /* Pods_WxArticle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WxArticle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65099B1546CFD52AF0042AA2 /* Pods-WxArticle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WxArticle.release.xcconfig"; path = "Pods/Target Support Files/Pods-WxArticle/Pods-WxArticle.release.xcconfig"; sourceTree = "<group>"; };
+		9D47A9B91C1B0F57005582AC /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		9D47A9BA1C1B0F57005582AC /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		9D47A9BB1C1B0F57005582AC /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		9D47A9BC1C1B0F57005582AC /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		9D47A9BD1C1B0F57005582AC /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		9D47A9C01C1B19B7005582AC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9D47A9C21C1B1A34005582AC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9D883BD11C0993E000E50390 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D883BD21C0993E000E50390 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D883BD41C0993E000E50390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,6 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D47A9C31C1B1A34005582AC /* CoreTelephony.framework in Frameworks */,
+				9D47A9C11C1B19B7005582AC /* SystemConfiguration.framework in Frameworks */,
+				9D47A9BE1C1B0F57005582AC /* libWeChatSDK.a in Frameworks */,
 				49A0C421549F05D367CFAC46 /* Pods_WxArticle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,9 +123,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9D47A9B81C1B0F57005582AC /* wxsdk */ = {
+			isa = PBXGroup;
+			children = (
+				9D47A9B91C1B0F57005582AC /* libWeChatSDK.a */,
+				9D47A9BA1C1B0F57005582AC /* read_me.txt */,
+				9D47A9BB1C1B0F57005582AC /* WechatAuthSDK.h */,
+				9D47A9BC1C1B0F57005582AC /* WXApi.h */,
+				9D47A9BD1C1B0F57005582AC /* WXApiObject.h */,
+			);
+			path = wxsdk;
+			sourceTree = "<group>";
+		};
 		9D883BD01C0993E000E50390 /* WxArticle */ = {
 			isa = PBXGroup;
 			children = (
+				9D47A9B81C1B0F57005582AC /* wxsdk */,
 				9D883BF81C0F192700E50390 /* Controller */,
 				9D883BEE1C09A6DD00E50390 /* ViewModel */,
 				9D883BE41C09959800E50390 /* tools */,
@@ -208,6 +235,8 @@
 		DF1E24452D24B1350E8A1032 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D47A9C21C1B1A34005582AC /* CoreTelephony.framework */,
+				9D47A9C01C1B19B7005582AC /* SystemConfiguration.framework */,
 				2A3FBFEED15A93922658CBE3 /* Pods_WxArticle.framework */,
 			);
 			name = Frameworks;
@@ -325,6 +354,7 @@
 			files = (
 				9D883BDC1C0993E000E50390 /* Main.storyboard in Resources */,
 				9D883BDA1C0993E000E50390 /* Assets.xcassets in Resources */,
+				9D47A9BF1C1B0F57005582AC /* read_me.txt in Resources */,
 				9D883BDB1C0993E000E50390 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,6 +571,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Objective-CBridgingHeader.h";
 				VALIDATE_PRODUCT = YES;
@@ -559,6 +590,19 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WxArticle/wxsdk",
 				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-lc++",
+					"-lsqlite3.0",
+					"-lz",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WxArticle/tools/Objective-CBridgingHeader.h";
@@ -576,6 +620,19 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WxArticle/wxsdk",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-lc++",
+					"-lsqlite3.0",
+					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tjw.WxArticle;
 				PRODUCT_NAME = "$(TARGET_NAME)";

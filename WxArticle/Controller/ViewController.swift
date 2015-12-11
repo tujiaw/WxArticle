@@ -50,6 +50,7 @@ class ViewController: UIViewController {
             self.typeId = 0
             self.navigationItem.title = "热点"
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,7 +94,7 @@ class ViewController: UIViewController {
             NSUserDefaults.standardUserDefaults().setValue(curTitle, forKey: "curTitle")
             NSUserDefaults.standardUserDefaults().setValue(self.typeId, forKey: "curId")
             
-            if toTop {
+            if toTop && self.tableView.numberOfRowsInSection(0) > 0 {
                 self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             }
         }
@@ -122,7 +123,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let articleViewController = segue.destinationViewController as? ArticleViewController {
+        if let articleViewController = segue.destinationViewController as? ArticleViewController2 {
             if let row = tableView.indexPathForSelectedRow?.row {
                 let goodArticleList = Data.sharedManager.goodArticle.contentlist
                 if goodArticleList.count > row {
@@ -162,5 +163,9 @@ extension ViewController {
     func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+}
+
+extension ViewController: WXApiDelegate {
+    
 }
 

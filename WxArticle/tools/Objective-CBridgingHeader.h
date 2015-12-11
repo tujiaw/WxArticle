@@ -13,5 +13,8 @@
 
 #import <CommonCrypto/CommonHMAC.h>
 
+@import UIKit;
+#import "../wxsdk/WXApiObject.h"
+#import "../wxsdk/WXApi.h"
 
 #endif

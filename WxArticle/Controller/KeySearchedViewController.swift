@@ -61,7 +61,7 @@ class KeySearchedViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let articleViewController = segue.destinationViewController as? ArticleViewController {
+        if let articleViewController = segue.destinationViewController as? ArticleViewController2 {
             if let row = tableView.indexPathForSelectedRow?.row {
                 let searchArticleList = Data.sharedManager.searchArticle.contentlist
                 if searchArticleList.count > row {

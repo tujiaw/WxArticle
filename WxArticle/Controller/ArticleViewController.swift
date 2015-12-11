@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArticleViewController: UIViewController {
+class ArticleViewController2: UIViewController {
     var userName = ""
     var url = ""
     
@@ -28,4 +28,12 @@ class ArticleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
         
     }
+    
+    @IBAction func onShare(sender: UIBarButtonItem) {
+        let req = SendMessageToWXReq()
+        req.text = "分享测试"
+        req.bText = true
+        WXApi.sendReq(req)
+    }
+    
 }
