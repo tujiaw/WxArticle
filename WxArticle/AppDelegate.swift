@@ -7,20 +7,43 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var isFinished = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         WXApi.registerApp("wx1013aed50e437b80")
-        NSThread.sleepForTimeInterval(2)
+        
+        NSThread.detachNewThreadSelector("runOnNewThread", toTarget: self, withObject: nil)
+        while !isFinished {
+            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+        }
         return true
     }
+    
+    func runOnNewThread() {
+        let curId = max(NSUserDefaults.standardUserDefaults().integerForKey("curId"), 0)
+        let request = GoodArticleRequest(typeId: curId, key: "", page: 1)
+        Alamofire.request(.GET, request.url).responseJSON {
+            response in
+            if response.result.isSuccess {
+                if let value = response.result.value {
+                    Data.sharedManager.goodArticle.setData(value)
+                }
+            }
+            self.performSelectorOnMainThread("onFinished", withObject: nil, waitUntilDone: false)
+        }
+    }
 
+    func onFinished() {
+        isFinished = true
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

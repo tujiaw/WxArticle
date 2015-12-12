@@ -17,18 +17,8 @@ class ViewController: UIViewController {
     var imageCache = [(String, UIImage)]()
     
     var isLoading = false
-    var typeId: Int = -1 {
-        didSet {
-            self.navigationController?.popToRootViewControllerAnimated(true)
-            Data.sharedManager.goodArticle.contentlist = [ContentList]()
-            requestData(self.typeId, page: self.page, toTop: true)
-        }
-    }
-    var page: Int = 1 {
-        didSet {
-            requestData(self.typeId, page: self.page)
-        }
-    }
+    var typeId: Int = 0
+    var page = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +31,11 @@ class ViewController: UIViewController {
         refreshControl.addTarget(self, action: "onRefreshControl", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
-        let curId = NSUserDefaults.standardUserDefaults().integerForKey("curId")
-        let curTitle = NSUserDefaults.standardUserDefaults().stringForKey("curTitle")
-        if let curTitle = curTitle {
-            self.typeId = curId
-            self.navigationItem.title = curTitle
-        } else {
-            self.typeId = 0
-            self.navigationItem.title = "热点"
+        self.navigationItem.title = NSUserDefaults.standardUserDefaults().stringForKey("curTitle") ?? "热点"
+        if Data.sharedManager.goodArticle.contentlist.count > 0 {
+            self.typeId = Data.sharedManager.goodArticle.contentlist[0].typeId
+            self.page = Data.sharedManager.goodArticle.currentPage
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +49,17 @@ class ViewController: UIViewController {
         requestData(typeId, page: 1)
     }
     
+    func requestNewType(typeId: Int) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        Data.sharedManager.goodArticle.contentlist = [ContentList]()
+        self.page = 0
+        requestData(typeId, page: self.page, toTop: true)
+    }
+    
+    func requestNewPage(page: Int) {
+        requestData(self.typeId, page: page)
+    }
+    
     func requestData(typeId: Int, page: Int, toTop: Bool = false) {
         if isLoading {
             return
@@ -73,6 +69,9 @@ class ViewController: UIViewController {
         if !refreshControl.refreshing {
             self.view.makeToastActivity()
         }
+        
+        self.typeId = typeId
+        self.page = page
         
         let request = GoodArticleRequest(typeId: self.typeId, key: "", page: self.page)
         print(request.url)
@@ -135,14 +134,14 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if isLoading {
+        if isLoading || scrollView.contentSize.height <= 0 {
             return
         }
         
         let space = CGFloat(20)
         let y = scrollView.contentOffset.y + scrollView.bounds.size.height - scrollView.contentInset.bottom
         if y > scrollView.contentSize.height + space {
-            ++self.page
+            requestNewPage(++self.page)
         }
     }
 }

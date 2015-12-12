@@ -69,7 +69,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
                         for controller in navController.viewControllers {
                             if let viewController = controller as? ViewController {
                                 let id = Data.sharedManager.category.typeList[indexPath.row].id
-                                viewController.typeId = id
+                                viewController.requestNewType(id)
                             }
                         }
                     }
