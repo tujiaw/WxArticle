@@ -167,7 +167,7 @@
         <!--Title-->
         <scene sceneID="nfk-EU-jew">
             <objects>
-                <viewController id="rO7-gJ-DFC" customClass="ArticleViewController2" customModule="WxArticle" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rO7-gJ-DFC" customClass="ArticleContentViewController" customModule="WxArticle" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HMP-Ir-PRW"/>
                         <viewControllerLayoutGuide type="bottom" id="1VH-Xl-Muy"/>
@@ -192,7 +192,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Bps-XS-lbd">
-                        <barButtonItem key="rightBarButtonItem" title="Share" style="done" id="Mgk-gI-ZIP">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="Mgk-gI-ZIP">
                             <connections>
                                 <action selector="onShare:" destination="rO7-gJ-DFC" id="ehK-fH-wuX"/>
                             </connections>

@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum DataType {
+    case None
+    case GoodArticle
+    case Category
+    case SearchArticle
+}
+
 class Data {
     static let sharedManager = Data()
     

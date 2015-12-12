@@ -123,12 +123,12 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let articleViewController = segue.destinationViewController as? ArticleViewController2 {
+        if let articleViewController = segue.destinationViewController as? ArticleContentViewController {
             if let row = tableView.indexPathForSelectedRow?.row {
                 let goodArticleList = Data.sharedManager.goodArticle.contentlist
                 if goodArticleList.count > row {
-                    articleViewController.userName = goodArticleList[row].userName
-                    articleViewController.url = goodArticleList[row].url
+                    articleViewController.dataType = DataType.GoodArticle
+                    articleViewController.content = goodArticleList[row]
                 }
             }
         }
@@ -165,7 +165,4 @@ extension ViewController {
     }
 }
 
-extension ViewController: WXApiDelegate {
-    
-}
 
