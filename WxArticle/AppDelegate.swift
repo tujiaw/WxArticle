@@ -9,6 +9,35 @@
 import UIKit
 import Alamofire
 
+class RunLoop: NSObject {
+    var isFinished = false
+    var handle: (()->Void)?
+    
+    func start(handle: ()->Void) {
+        self.handle = handle
+        
+        NSThread.detachNewThreadSelector("runOnNewThread", toTarget: self, withObject: nil)
+        while !isFinished {
+            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+        }
+    }
+    
+    func end() {
+        self.performSelectorOnMainThread("onFinished", withObject: nil, waitUntilDone: false)
+    }
+    
+    func runOnNewThread() {
+        if let handle = handle {
+            handle()
+        }
+    }
+    
+    func onFinished() {
+        self.isFinished = true
+    }
+}
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,29 +48,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         WXApi.registerApp("wx1013aed50e437b80")
         
-        NSThread.detachNewThreadSelector("runOnNewThread", toTarget: self, withObject: nil)
-        while !isFinished {
-            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
-        }
-        return true
-    }
-    
-    func runOnNewThread() {
-        let curId = max(NSUserDefaults.standardUserDefaults().integerForKey("curId"), 0)
-        let request = GoodArticleRequest(typeId: curId, key: "", page: 1)
-        Alamofire.request(.GET, request.url).responseJSON {
-            response in
-            if response.result.isSuccess {
-                if let value = response.result.value {
-                    Data.sharedManager.goodArticle.setData(value)
+        let runLoop = RunLoop()
+        runLoop.start({()->Void in
+            let curId = max(NSUserDefaults.standardUserDefaults().integerForKey("curId"), 0)
+            let request = GoodArticleRequest(typeId: curId, key: "", page: 1)
+            Alamofire.request(.GET, request.url).responseJSON {
+                response in
+                if response.result.isSuccess {
+                    if let value = response.result.value {
+                        Data.sharedManager.goodArticle.setData(value)
+                    }
                 }
+                runLoop.end()
             }
-            self.performSelectorOnMainThread("onFinished", withObject: nil, waitUntilDone: false)
-        }
-    }
+        })
 
-    func onFinished() {
-        isFinished = true
+        return true
     }
     
     func applicationWillResignActive(application: UIApplication) {
