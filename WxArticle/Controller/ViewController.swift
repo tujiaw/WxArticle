@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         if Data.sharedManager.goodArticle.contentlist.count > 0 {
             self.typeId = Data.sharedManager.goodArticle.contentlist[0].typeId
             self.page = Data.sharedManager.goodArticle.currentPage
+            print("typeId:\(typeId), page:\(page)")
         }
     }
 
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
     func requestNewType(typeId: Int) {
         self.navigationController?.popToRootViewControllerAnimated(true)
         Data.sharedManager.goodArticle.contentlist = [ContentList]()
-        self.page = 0
+        self.page = 1
         requestData(typeId, page: self.page, toTop: true)
     }
     
@@ -72,9 +73,9 @@ class ViewController: UIViewController {
         
         self.typeId = typeId
         self.page = page
+        print("typeId:\(typeId), page:\(page)")
         
         let request = GoodArticleRequest(typeId: self.typeId, key: "", page: self.page)
-        print(request.url)
         Alamofire.request(.GET, request.url).responseJSON {
             response in
             if response.result.isSuccess {
