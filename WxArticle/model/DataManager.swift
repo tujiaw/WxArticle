@@ -13,6 +13,7 @@ enum DataType {
     case GoodArticle
     case Category
     case SearchArticle
+    case LaifuJoke
 }
 
 class Data {
@@ -21,4 +22,6 @@ class Data {
     var goodArticle = GoodArticleResponse()
     var category = CategoryResponse()
     var searchArticle = GoodArticleResponse()
+    var textJoke = LaifuResponse();
+    var imageJoke = ImageJokeResponse();
 }
