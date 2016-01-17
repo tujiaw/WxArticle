@@ -104,6 +104,21 @@ class ImageJokeViewCell : UITableViewCell, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         webView.stringByEvaluatingJavaScriptFromString(ImageJokeViewCell.touchJSStr)
+        disableLongPressGesturesForView(webView)
+    }
+    
+    // 禁用图片放大镜
+    func disableLongPressGesturesForView(view: UIView) {
+        for subview in view.subviews {
+            if let gestures = subview.gestureRecognizers as [UIGestureRecognizer]! {
+                for gesture in gestures {
+                    if gesture is UILongPressGestureRecognizer {
+                        gesture.enabled = false
+                    }
+                }
+            }
+            disableLongPressGesturesForView(subview)
+        }
     }
     
     func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject) {
