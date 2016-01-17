@@ -161,7 +161,7 @@ extension JokeViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             var cell = tableView.dequeueReusableCellWithIdentifier(ImageJokeViewCell.ID) as? ImageJokeViewCell
             if cell == nil {
-                cell = ImageJokeViewCell(style: .Subtitle, reuseIdentifier: ImageJokeViewCell.ID)
+                cell = ImageJokeViewCell(style: .Subtitle, reuseIdentifier: ImageJokeViewCell.ID, parent: self)
             }
             
             if Data.sharedManager.imageJoke.list.count > indexPath.row {
