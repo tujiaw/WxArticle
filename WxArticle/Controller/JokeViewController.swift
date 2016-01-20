@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 class JokeViewController: UIViewController {
-    let segControl = UISegmentedControl(items: ["文本", "图片"])
+    let segControl = UISegmentedControl(items: ["笑话", "趣图"])
     let tableView = UITableView()
     
     var isLoading = false
